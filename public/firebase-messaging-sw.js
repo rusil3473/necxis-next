@@ -5,13 +5,13 @@ importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-com
 // your app's Firebase config object.
 // https://firebase.google.com/docs/web/setup#config-object
 firebase.initializeApp({
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId:process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket:process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId:process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
-  appId:process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId:process.env.NEXT_PUBLIC_FIREBASE_MEASURMENT_ID
+  apiKey: "AIzaSyA-EtQNfryO7f2KwaVgTZo7iAQxzHY1KqY",
+  authDomain: "necxis-b0c7b.firebaseapp.com",
+  projectId:"necxis-b0c7b",
+  storageBucket:"necxis-b0c7b.firebasestorage.app",
+  messagingSenderId:"454626850308",
+  appId:"1:454626850308:web:707733f387d193055aa751",
+  measurementId:"G-YP1P90LXJV"
 });
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
