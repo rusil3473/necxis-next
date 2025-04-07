@@ -12,7 +12,7 @@ import {useAuth} from "@/provider/AuthProvider"
 export default function Header() {
 	const {handleSignOut}=useAuth();
   return (
-  <Container sx={{}}>
+  <Container sx={{boxShadow:'0 4px 6px rgba(0,0,0,0.1)'}}>
     <Box
       sx={{
       height:"100px",
@@ -20,7 +20,6 @@ export default function Header() {
         justifyContent: "space-between",
         alignItems: "center",
         px: 3,
-        backgroundColor:"blue"
       }}
     >
    

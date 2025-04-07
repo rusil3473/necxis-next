@@ -104,10 +104,10 @@ function SignIn() {
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1, margin: 3, flexDirection: "row" }}>
           <Typography>
-            Already a user?{" "}
+            New Here?{" "}
             <Link href="/signIn" >
               <Typography component="span" sx={{ color: "primary", textDecoration: "underline", cursor: "pointer", "&:hover": { color: "primary.dark" } }}>
-                Sign In
+                Sign Up Now
               </Typography>
             </Link>
           </Typography>
