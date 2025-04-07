@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "454626850308",
+    "project_id": "necxis-b0c7b",
+    "storage_bucket": "necxis-b0c7b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454626850308:android:7b70282c9bea9a185aa751",
+        "android_client_info": {
+          "package_name": "com.necxis.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbiIjGAfAFjBZE03qsfWnQQ6n25FObFQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
