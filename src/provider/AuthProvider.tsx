@@ -2,7 +2,8 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged, User, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, getRedirectResult } from "firebase/auth";
 import { auth } from "../lib/firebase/firebase";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter,  } from "next/navigation";
+
 
 type authData = {
     user: User | null | undefined;
@@ -22,17 +23,17 @@ const AuthContext = createContext<authData>({
 });
 
 
+
+
 const AuthProvider = ({ children }: PropsWithChildren) => {
     const [user, setUser] = useState<User | null>();
     const router = useRouter();
-    const useSearchPara = useSearchParams();
-    const redirectTo=useSearchPara.get("redirect") || "/ruuuuu";
     ; useEffect(() => {
         getRedirectResult(auth).then((result) => {
             if (result && result.user) {
                 console.log("login success ")
                 setUser(result.user);
-                router.push(redirectTo);
+                router.push("/");
             }
             else {
                 setUser(null);
