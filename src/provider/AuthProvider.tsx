@@ -1,6 +1,6 @@
 "use client"
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User, signOut , createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged, User, signOut , createUserWithEmailAndPassword , signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../lib/firebase/firebase";
 
 type authData = {
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const handleSignIn = async () => {
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithPopup(auth, provider);
+            await signInWithRedirect(auth, provider);
         } catch (err) {
             console.error("Error during sign-in:", err);
         }
