@@ -38,7 +38,7 @@ function SignIn() {
   const onSignUp = async (data: userType) => {
     setIsLoading(true);
     try {
-      await signUp(data);
+      signUp(data);
     } catch (error) {
       console.log(error)
     }

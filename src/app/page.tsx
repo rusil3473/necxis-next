@@ -1,14 +1,10 @@
 "use client"
-import Link from "next/link";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {useAuth} from "@/provider/AuthProvider"
 import Header from "@/component/Header";
 export default function Home() {
-
-    const { handleSignOut: signOut } = useAuth();
 
     return (
         <Box sx={{height:"100vh",display:"flex",alignItems:"center",flexDirection:"column"}}>

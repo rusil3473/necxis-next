@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import Link from "next/link";
 
 const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -36,7 +36,7 @@ function SignIn() {
   const onSignIn = async (data: userType) => {
     setIsLoading(true);
     try {
-      await handleSignInWithPassword(data);
+      handleSignInWithPassword(data);
       router.refresh();
     } catch (error) {
       console.log(error)
@@ -101,6 +101,16 @@ function SignIn() {
           <Button variant={isLoading ? "contained" : "outlined"} color="primary" fullWidth disabled={isLoading} onClick={handleSubmit(onSignIn)}>
             Sign In
           </Button>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1, margin: 3, flexDirection: "row" }}>
+          <Typography>
+            Already a user?{" "}
+            <Link href="/signIn" >
+              <Typography component="span" sx={{ color: "primary", textDecoration: "underline", cursor: "pointer", "&:hover": { color: "primary.dark" } }}>
+                Sign In
+              </Typography>
+            </Link>
+          </Typography>
         </Box>
       </Paper>
       <Typography sx={{ fontWeight: "bold", fontSize: 20 }}>OR</Typography>
