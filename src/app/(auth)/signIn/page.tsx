@@ -19,11 +19,13 @@ const userSchema = z.object({
 })
 type userType = z.infer<typeof userSchema>;
 
-function SignIn({searchParams}:any) {
+import { ParsedUrlQueryInput } from 'querystring';
+
+function SignIn({ searchParams }: { searchParams: ParsedUrlQueryInput }) {
   const { user, handleSignIn: signIn, handleSignInWithPassword,handleSignInWithCred } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const {token}=use(searchParams);
+  const token = searchParams?.token as string | undefined;
 	
   const { control, handleSubmit,  } = useForm<userType>({
     resolver: zodResolver(userSchema),
@@ -39,7 +41,7 @@ function SignIn({searchParams}:any) {
       handleSignInWithCred(cred);
     }
 
-  },[token]);
+  }, [token, handleSignInWithCred]);
 
 
   const onSignIn = async (data: userType) => {
