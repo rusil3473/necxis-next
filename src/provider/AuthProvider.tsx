@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged, User, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, getRedirectResult } from "firebase/auth";
+import { GoogleAuthProvider,signInWithCredential,signInWithPopup, onAuthStateChanged, User, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, } from "firebase/auth";
 import { auth } from "../lib/firebase/firebase";
-import { useRouter,  } from "next/navigation";
+
 
 
 type authData = {
@@ -11,6 +12,7 @@ type authData = {
     handleSignOut: () => void;
     handleSignInWithPassword: (userData: { email: string; password: string }) => void;
     handleSignUpWithPassword: (userData: { email: string; password: string }) => void;
+    handleSignInWithCred:(cred:any)=>void;
 }
 
 
@@ -19,7 +21,8 @@ const AuthContext = createContext<authData>({
     handleSignIn: async () => { },
     handleSignOut: async () => { },
     handleSignInWithPassword: async () => { },
-    handleSignUpWithPassword: async () => { }
+    handleSignUpWithPassword: async () => { },
+    handleSignInWithCred:async()=>{}
 });
 
 
@@ -27,21 +30,9 @@ const AuthContext = createContext<authData>({
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
     const [user, setUser] = useState<User | null>();
-    const router = useRouter();
-    ; useEffect(() => {
-        getRedirectResult(auth).then((result) => {
-            if (result && result.user) {
-                console.log("login success ")
-                setUser(result.user);
-                router.push("/");
-            }
-            else {
-                setUser(null);
-            }
-        }).catch((err) => { console.log(err) })
-
-
-
+   
+    useEffect(() => {
+       
         const stateChange = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
@@ -51,7 +42,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             }
         })
         return () => stateChange();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
     }, []);
 
     useEffect(() => {
@@ -59,10 +50,19 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
     }, []);
 
+    const handleSignInWithCred=async(cred:any)=>{
+        try {
+            signInWithCredential(auth,cred);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     const handleSignIn = async () => {
         try {
             const provider = new GoogleAuthProvider();
-            await signInWithRedirect(auth, provider);
+            await signInWithPopup(auth, provider);
         } catch (err) {
             console.error("Error during sign-in:", err);
         }
@@ -89,7 +89,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         }
     }
     return (
-        <AuthContext.Provider value={{ user, handleSignIn, handleSignOut, handleSignInWithPassword, handleSignUpWithPassword }}>
+        <AuthContext.Provider value={{ user, handleSignIn, handleSignOut, handleSignInWithPassword, handleSignUpWithPassword,handleSignInWithCred}}>
             {children}
         </AuthContext.Provider>
 

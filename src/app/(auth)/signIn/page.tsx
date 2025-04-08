@@ -11,26 +11,36 @@ import { Controller } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
-
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import {use} from "react";
 const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z.string().min(6, { message: "Password must be at least 6 characters long" }).max(20, { message: "Password must be at most 20 characters long" })
 })
 type userType = z.infer<typeof userSchema>;
 
-function SignIn() {
-  const { user, handleSignIn: signIn, handleSignInWithPassword } = useAuth();
+function SignIn({searchParams}:any) {
+  const { user, handleSignIn: signIn, handleSignInWithPassword,handleSignInWithCred } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-
-
-  const { control, handleSubmit, watch } = useForm<userType>({
+  const {token}=use(searchParams);
+	
+  const { control, handleSubmit,  } = useForm<userType>({
     resolver: zodResolver(userSchema),
     defaultValues: {
       email: "",
       password: ""
     }
   });
+  useEffect(()=>{
+  	
+    if(token && typeof token ==="string"){
+      const cred=GoogleAuthProvider.credential(token);
+      handleSignInWithCred(cred);
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[token]);
 
 
   const onSignIn = async (data: userType) => {
