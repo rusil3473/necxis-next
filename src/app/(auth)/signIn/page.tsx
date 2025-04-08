@@ -21,7 +21,8 @@ type userType = z.infer<typeof userSchema>;
 
 import { ParsedUrlQueryInput } from 'querystring';
 
-function SignIn({ searchParams }: { searchParams: ParsedUrlQueryInput }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function SignIn({ searchParams }: any) {
   const { user, handleSignIn: signIn, handleSignInWithPassword,handleSignInWithCred } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
